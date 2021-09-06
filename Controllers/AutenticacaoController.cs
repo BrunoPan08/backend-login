@@ -74,7 +74,7 @@ namespace ProjetoKeener3.Controllers
         {
             var userExists = await userManager.FindByNameAsync(model.Nome);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Usuário já existe!" });
 
             AplicacaoUsuario user = new AplicacaoUsuario()
             {
@@ -84,7 +84,7 @@ namespace ProjetoKeener3.Controllers
             };
             var result = await userManager.CreateAsync(user, model.Senha);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "A criação du usuário falho!" });
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
@@ -95,7 +95,7 @@ namespace ProjetoKeener3.Controllers
         {
             var userExists = await userManager.FindByNameAsync(model.Nome);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Usuário já existe!" });
 
             AplicacaoUsuario user = new AplicacaoUsuario()
             {
@@ -105,7 +105,7 @@ namespace ProjetoKeener3.Controllers
             };
             var result = await userManager.CreateAsync(user, model.Senha);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "A criação du usuário falho!" });
 
             if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -117,7 +117,7 @@ namespace ProjetoKeener3.Controllers
                 await userManager.AddToRoleAsync(user, UserRoles.Admin);
             }
 
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            return Ok(new Response { Status = "Success", Message = "Usuário criado com sucesso!" });
         }
     }
 }
